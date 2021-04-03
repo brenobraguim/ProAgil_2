@@ -2,10 +2,8 @@
   <div class="form-group mb-12">
     Filtro:<input type="text" placeholder="Buscar" style="width: 400px; margin: 10px;"
     [(ngModel)]="filtroLista">
-    <button class="btn btn-success">Buscar</button>
   </div>
 </div>
-<h6>Filtro: {{filtroLista}}</h6>
 <table class="table table-striped">
   <thead style="background-color: black; color:chocolate; text-align: center;">
     <tr>
@@ -40,7 +38,7 @@
       <td>{{evento.lote | uppercase}}</td>
       <td style="width: 250px; text-align: center;">
         <button class="btn btn-success" style="margin: 2px;">Adicionar</button>
-        <button class="btn btn-warning">Detalhes</button>
+        <button class="btn btn-warning" style="margin: 2px;">Detalhes</button>
       </td>
     </tr>
   </tbody>

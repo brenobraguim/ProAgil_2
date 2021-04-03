@@ -8,42 +8,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventosComponent implements OnInit {
 
-  _filtroLista!: string;
-  get filtroLista() : string{
-  return this._filtroLista;
+  // tslint:disable-next-line: variable-name
+  _filtroLista = '';
+  get filtroLista(): string {
+    return this._filtroLista;
   }
-  set filtroLista(value : string){
-  this._filtroLista=value;
-  this.eventosFiltrados=this.filtroLista ? this.filtrarEvento(this.filtroLista) : this.eventos;
+  set filtroLista(value: string) {
+    this._filtroLista = value;
+    this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
 
-  eventosFiltrados: any=[];
-  eventos: any=[];
-  imagemLargura=50;
-  imagemMargem=2;
-  mostrarImagem=false;
+  eventosFiltrados: any = [];
+  eventos: any = [];
+  imagemLargura = 50;
+  imagemMargem = 2;
+  mostrarImagem = false;
 
   constructor(private http: HttpClient) { }
 
+  // tslint:disable-next-line: typedef
   ngOnInit() {
     this.getEventos();
   }
-  
-  filtrarEvento(filtrarPor : string) : any {
+
+  filtrarEventos(filtrarPor: string): any {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.eventos.filter(
-      (evento : any) => evento.tema.toLocaleLowerCase().IndexOf(filtrarPor) !== -1
+      (evento: any) => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1
     );
   }
 
+  // tslint:disable-next-line: typedef
   alternarImagem(){
-    this.mostrarImagem=!this.mostrarImagem;
+    this.mostrarImagem = ! this.mostrarImagem;
   }
 
+  // tslint:disable-next-line: typedef
   getEventos(){
+    // tslint:disable-next-line: deprecation
     this.http.get('http://localhost:5000/api/values').subscribe(response => {
-      this.eventosFiltrados=this.eventos;
-      this.eventos = response;
+      this.eventosFiltrados = this.eventos = response;
     }, error => {
       console.log(error);
     }
