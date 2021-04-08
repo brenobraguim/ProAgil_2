@@ -18,30 +18,47 @@ namespace ProAgil.API.Controllers
             
         }
 
-        [HttpGet("getByName/{name}")]
-        public async Task<IActionResult> Get(string name)
+        [HttpGet]
+        public async Task<ActionResult> Get ()
         {
             try
             {
-                var results = await _repos.GetAllPalestrantesAsyncByName(name, true);
-                return Ok(results);
+                var result = await _repos.GetAllPalestrantesAsync(true);
+                return Ok(result);
             }
             catch (System.Exception)
-            {   
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de Dados Falhou");
+            {
+                
+                return this.StatusCode(StatusCodes.Status500InternalServerError,"Banco de Dados Falhou");
             }
         }
 
-        [HttpGet("{Id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult> Get (int id)
         {
             try
             {
-                var results = await _repos.GetPalestrantesAsync(id, true);
-                return Ok(results);
+                var resultado = await _repos.GetPalestranteAsyncById(id,true);
+                return Ok(resultado);
             }
             catch (System.Exception)
-            {   
+            {
+                
+                return this.StatusCode(StatusCodes.Status500InternalServerError,"Banco de Dados Falhou");
+            }
+        }
+
+        [HttpGet("byName/{name}")]
+        public async Task<ActionResult> Get (string name)
+        {
+            try
+            {
+                var resultado = await _repos.GetAllPalestrantesAsyncByName(name,true);
+                return Ok(resultado);
+            }
+            catch (System.Exception)
+            {
+                
                 return this.StatusCode(StatusCodes.Status500InternalServerError,"Banco de Dados Falhou");
             }
         }
@@ -54,7 +71,7 @@ namespace ProAgil.API.Controllers
                 _repos.Add(model);
                 
                 if(await _repos.SaveChangesAsync()){
-                    return Created($"/api/palestrante/{model.Id}", model);
+                    return Created($"/api/Palestrante/{model.Id}", model);
                 }
             }
             catch (System.Exception)
@@ -70,13 +87,13 @@ namespace ProAgil.API.Controllers
         {
             try
             {
-                var palestra = await _repos.GetPalestrantesAsync(Id, false);
-                if (palestra==null) return NotFound();
+                var evento = await _repos.GetPalestranteAsyncById(Id, false);
+                if (evento==null) return NotFound();
 
                 _repos.Update(model);
                 
                 if(await _repos.SaveChangesAsync()){
-                    return Created($"/api/palestrante/{model.Id}", model);
+                    return Created($"/api/Palestrante/{model.Id}", model);
                 }
             }
             catch (System.Exception)
@@ -92,10 +109,10 @@ namespace ProAgil.API.Controllers
         {
             try
             {
-                var palestra = await _repos.GetPalestrantesAsync(Id, false);
-                if (palestra==null) return NotFound();
+                var evento = await _repos.GetPalestranteAsyncById(Id, false);
+                if (evento==null) return NotFound();
 
-                _repos.Update(palestra);
+                _repos.Delete(evento);
                 
                 if(await _repos.SaveChangesAsync()){
                     return Ok();
