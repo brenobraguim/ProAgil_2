@@ -1,5 +1,6 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { EventoService } from '../_services/evento.service';
 import { Component, OnInit } from '@angular/core';
+import { Evento } from '../_models/Evento';
 
 @Component({
   selector: 'app-eventos',
@@ -8,46 +9,54 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventosComponent implements OnInit {
 
+
   // tslint:disable-next-line: variable-name
-  _filtroLista = '';
+  _filtrolista = '';
   get filtroLista(): string {
-    return this._filtroLista;
+    return this._filtrolista;
   }
   set filtroLista(value: string) {
-    this._filtroLista = value;
+    this._filtrolista = value;
     this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
 
-  eventosFiltrados: any = [];
-  eventos: any = [];
+  eventosFiltrados: Evento[] = [];
+  eventos: Evento[] = [];
   imagemLargura = 50;
   imagemMargem = 2;
   mostrarImagem = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private eventoService: EventoService) { }
+
 
   // tslint:disable-next-line: typedef
   ngOnInit() {
     this.getEventos();
   }
 
-  filtrarEventos(filtrarPor: string): any {
+  filtrarEventos(filtrarPor: string): Evento[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.eventos.filter(
       (evento: any) => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1
     );
   }
 
+
   // tslint:disable-next-line: typedef
   alternarImagem(){
     this.mostrarImagem = ! this.mostrarImagem;
   }
 
+
   // tslint:disable-next-line: typedef
   getEventos(){
+
     // tslint:disable-next-line: deprecation
-    this.http.get('http://localhost:5000/api/values').subscribe(response => {
-      this.eventosFiltrados = this.eventos = response;
+    this.eventoService.getAllEvento().subscribe(
+      // tslint:disable-next-line: variable-name
+      (_eventos: Evento[]) => {
+      this.eventosFiltrados = this.eventos = _eventos;
+      console.log(_eventos);
     }, error => {
       console.log(error);
     }

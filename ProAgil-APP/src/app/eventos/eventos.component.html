@@ -9,8 +9,8 @@
     <tr>
       <th>
         <button class="btn" style="background-color: crimson; color: black;"
-        (click)="alternarImagem()">
-          Mostrar Imagem
+          (click)="alternarImagem()">
+          <i class="{{mostrarImagem ? 'fa fa-eye-slash' : 'fa fa-eye'}}"></i>
         </button>
       </th>
       <th>#</th>
@@ -30,12 +30,19 @@
         [style.width.px]="imagemLargura"
         [style.margin.px]="imagemMargem">
       </td>
-      <td>{{evento.eventoId}}</td>
+      <td>{{evento.id}}</td>
       <td>{{evento.tema}}</td>
       <td>{{evento.local}}</td>
-      <td>{{evento.dataEvento}}</td>
+      <td>{{evento.dataEvento | DateTimeFormatType}}</td>
       <td>{{evento.qtdPessoas}}</td>
-      <td>{{evento.lote | uppercase}}</td>
+      <td>
+        <div *ngIf="!evento.lotes.length">
+          Não Informado!
+        </div>
+        <div *ngIf="evento.lotes.length">
+          {{evento.lotes[0].nome| uppercase}}
+        </div>
+      </td>
       <td style="width: 250px; text-align: center;">
         <button class="btn btn-success" style="margin: 2px;">Adicionar</button>
         <button class="btn btn-warning" style="margin: 2px;">Detalhes</button>
