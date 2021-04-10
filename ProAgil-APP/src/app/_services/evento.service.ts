@@ -25,4 +25,18 @@ constructor(private http: HttpClient) { }
     return this.http.get<Evento>(`${this.baseUrl}/${id}`);
   }
 
+  // tslint:disable-next-line: typedef
+  postEvento(evento: Evento){
+    return this.http.post(this.baseUrl, evento);
+  }
+
+  // tslint:disable-next-line: typedef
+  putEvento(evento: Evento){
+    return this.http.put(`${this.baseUrl}/${evento.id}`, evento);
+  }
+
+  // tslint:disable-next-line: typedef
+  deleteEvento(id: number){
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
 }
