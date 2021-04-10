@@ -1,6 +1,7 @@
 import { EventoService } from '../_services/evento.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Evento } from '../_models/Evento';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-eventos',
@@ -25,9 +26,17 @@ export class EventosComponent implements OnInit {
   imagemLargura = 50;
   imagemMargem = 2;
   mostrarImagem = false;
+  modalRef = {} as BsModalRef;
 
-  constructor(private eventoService: EventoService) { }
+  constructor(
+    private eventoService: EventoService,
+    private modalService: BsModalService
+    ) { }
 
+  // tslint:disable-next-line: typedef
+  openModal(template: TemplateRef<any>){
+    this.modalRef = this.modalService.show(template);
+  }
 
   // tslint:disable-next-line: typedef
   ngOnInit() {
