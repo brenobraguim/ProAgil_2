@@ -1,5 +1,8 @@
+// tslint:disable-next-line: quotemark
 import { Lote } from "./Lote";
+// tslint:disable-next-line: quotemark
 import { Palestrante } from "./Palestrante";
+// tslint:disable-next-line: quotemark
 import { RedeSocial } from "./RedeSocial";
 
 export interface Evento {

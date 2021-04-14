@@ -133,7 +133,7 @@ export class EventosComponent implements OnInit {
           (novoEvento: Evento | any) => {
             template.hide();
             this.getEventos();
-          }, error =>{
+          }, error => {
             console.log(error);
           }
         );
@@ -144,7 +144,7 @@ export class EventosComponent implements OnInit {
           () => {
             template.hide();
             this.getEventos();
-          }, error =>{
+          }, error => {
             console.log(error);
           }
         );

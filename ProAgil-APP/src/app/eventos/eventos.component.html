@@ -126,7 +126,7 @@ role="dialog" aria-labelledby="dialog-sizes-name1">
       <label><b>Data e Hora</b></label>
       <input type="text" class="form-control"
       bsDatepicker
-      [bsConfig]="{dateInputFormat : 'DD/MM/YYYY hh:mm A'}"
+      [bsConfig]="{dateInputFormat : 'DD/MM/YYYY HH:MM A'}"
       [ngClass]="{'is-invalid': registerForm.get('dataEvento')!.errors && registerForm.get('dataEvento')!.touched,
       'is-valid': !registerForm.get('dataEvento')!.errors && registerForm.get('dataEvento')!.touched}"
       formControlName="dataEvento" placeholder="Insira a Data e Hora">
