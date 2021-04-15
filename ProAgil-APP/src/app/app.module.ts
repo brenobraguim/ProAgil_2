@@ -12,8 +12,12 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 
 import { AppComponent } from './app.component';
-import { EventosComponent } from './eventos/eventos.component';
 import { NavComponent } from './nav/nav.component';
+import { EventosComponent } from './eventos/eventos.component';
+import { PalestrantesComponent } from './palestrantes/palestrantes.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ContatosComponent } from './contatos/contatos.component';
+import {TituloComponent} from './_shared/titulo/titulo.component';
 
 import { DateTimeFormatTypePipe } from './_helps/DateTimeFormatType.pipe';
 
@@ -22,12 +26,17 @@ import { EventoService } from './_services/evento.service';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 
+
 @NgModule({
   declarations: [
     AppComponent,
       EventosComponent,
       NavComponent,
-      DateTimeFormatTypePipe
+      DateTimeFormatTypePipe,
+      PalestrantesComponent,
+      DashboardComponent,
+      ContatosComponent,
+      TituloComponent
    ],
   imports: [
     BrowserModule,

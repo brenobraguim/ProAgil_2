@@ -25,6 +25,7 @@ export class EventosComponent implements OnInit {
   registerForm!: FormGroup;
   bodyDeletarEvento = '';
   dataEvento!: string;
+  titulo = 'Eventos';
 
   // tslint:disable-next-line: variable-name
   _filtrolista = '';

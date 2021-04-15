@@ -1,3 +1,4 @@
+<app-titulo [title]="titulo" style="color: blue;"></app-titulo>
 <!--Linha de Busca e Criação de Evento ------------------------------------------------------------->
 <div class="flex">
   <div class="form-inline">
@@ -44,7 +45,7 @@
     <td>{{evento.id}}</td>
     <td>{{evento.tema}}</td>
     <td>{{evento.local}}</td>
-    <td>{{evento.dataEvento | DateTimeFormatType}}</td>
+    <td>{{evento.dataEvento | date:"dd/MM/yyyy"}}</td>
     <td>{{evento.qtdPessoas}}</td>
     <td>
       <div *ngIf="!evento.lotes.length">
@@ -126,7 +127,7 @@ role="dialog" aria-labelledby="dialog-sizes-name1">
       <label><b>Data e Hora</b></label>
       <input type="text" class="form-control"
       bsDatepicker 
-      value="{{dataEvento | DateTimeFormatType}}"
+      value="{{dataEvento | date:'dd/MM/yyyy'}}"
       [(ngModel)]="dataEvento"
       [bsConfig]="{dateInputFormat : 'dd/MM/yyyy HH:MM A'}"
       [ngClass]="{'is-invalid': registerForm.get('dataEvento')!.errors && registerForm.get('dataEvento')!.touched,
@@ -200,6 +201,8 @@ role="dialog" aria-labelledby="dialog-sizes-name1">
   <button class="btn btn-primary" [disabled]="!registerForm.valid" (click)="salvarAlteracao(template)">
     Criar Evento
   </button>
+
+
 </div>
 </div>
 </div>
