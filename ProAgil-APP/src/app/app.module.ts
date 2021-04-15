@@ -19,6 +19,9 @@ import { DateTimeFormatTypePipe } from './_helps/DateTimeFormatType.pipe';
 
 import { EventoService } from './_services/evento.service';
 
+import { ToastrModule } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,10 +39,16 @@ import { EventoService } from './_services/evento.service';
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+          timeOut: 10000,
+          positionClass: 'toast-bottom-right',
+          preventDuplicates: true,
+    })
   ],
   providers: [
-    EventoService
+    EventoService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
