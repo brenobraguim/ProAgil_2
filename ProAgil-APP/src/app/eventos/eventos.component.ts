@@ -26,7 +26,7 @@ export class EventosComponent implements OnInit {
   bodyDeletarEvento = '';
   dataEvento!: string;
   titulo = 'Eventos';
-
+  file!: File[];
   // tslint:disable-next-line: variable-name
   _filtrolista = '';
 
@@ -130,10 +130,26 @@ export class EventosComponent implements OnInit {
   }
 
   // tslint:disable-next-line: typedef
+  onFileChange(event: any){
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.lenght){
+      this.file = event.target.files;
+      console.log(this.file);
+    }
+  }
+
+
+  // tslint:disable-next-line: typedef
   salvarAlteracao(template: any){
     if (this.registerForm.valid){
       if (this.modoSalvar === 'post'){
         this.evento = Object.assign({}, this.registerForm.value);
+
+        // tslint:disable-next-line: deprecation
+        this.eventoService.postUpload(this.file).subscribe();
+        const NomeArquivo = this.evento.imagemUrl.split('\\', 3);
+        this.evento.imagemUrl = NomeArquivo[2];
+
         // tslint:disable-next-line: deprecation
         this.eventoService.postEvento(this.evento).subscribe(
           (novoEvento: Evento | any) => {

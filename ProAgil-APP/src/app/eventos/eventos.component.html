@@ -38,7 +38,7 @@
   <tr *ngFor="let evento of eventosFiltrados" style="text-align: center;">
     <td>
       <img *ngIf="mostrarImagem"
-      src="http://localhost:5000/img/{{evento.imagemUrl}}"
+      src="http://localhost:5000/Resources/Images/{{evento.imagemUrl}}"
       [style.width.px]="imagemLargura"
       [style.margin.px]="imagemMargem">
     </td>
@@ -156,10 +156,17 @@ role="dialog" aria-labelledby="dialog-sizes-name1">
 </div>
 <div class="form-group col-md-9">
   <label><b>Imagem</b></label>
-  <input type="text" class="form-control"
-  [ngClass]="{'is-invalid': registerForm.get('imagemUrl')!.errors && registerForm.get('imagemUrl')!.touched,
-  'is-valid': !registerForm.get('imagemUrl')!.errors && registerForm.get('imagemUrl')!.touched}"
-  formControlName="imagemUrl" placeholder="Insira a Imagem">
+  <table>
+    <tr>
+      <td>
+        <button class="btn btn-success" (click)="file.click()">Enviar Imagem</button>
+        <input type="file" #file class="form-control"
+        [ngClass]="{'is-invalid': registerForm.get('imagemUrl')!.errors && registerForm.get('imagemUrl')!.touched,
+        'is-valid': !registerForm.get('imagemUrl')!.errors && registerForm.get('imagemUrl')!.touched}" (change)="onFileChange($event)"
+        formControlName="imagemUrl" placeholder="Insira a Imagem" style="display: none;">
+      </td>
+    </tr>
+  </table>
   <div class="invalid-feedback">
     Imagem é Obrigatório
   </div>
@@ -195,14 +202,14 @@ role="dialog" aria-labelledby="dialog-sizes-name1">
 </form>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-secondary" style="margin-right: 74.7%;" (click)="template.hide()">
+  <button class="btn btn-secondary" style="margin-right: 73%;" (click)="template.hide()">
     Fechar
   </button>
   <button class="btn btn-primary" [disabled]="!registerForm.valid" (click)="salvarAlteracao(template)">
-    Criar Evento
+    Salvar Evento
   </button>
 
-
+  <p>Form Value: {{registerForm.value | json}}</p>
 </div>
 </div>
 </div>

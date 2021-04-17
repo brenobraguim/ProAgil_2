@@ -26,6 +26,15 @@ constructor(private http: HttpClient) { }
   }
 
   // tslint:disable-next-line: typedef
+  postUpload(file: File[]) {
+    // tslint:disable-next-line: no-angle-bracket-type-assertion
+    const fileToUpload = <File> file[0];
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    return this.http.post(`${this.baseUrl}/upload`, formData);
+  }
+
+  // tslint:disable-next-line: typedef
   postEvento(evento: Evento){
     return this.http.post(this.baseUrl, evento);
   }
